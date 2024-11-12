@@ -5,33 +5,33 @@ import tkinter as tk
 GPIO.setmode(GPIO.BCM)
 
 # Define the GPIO pins for the LEDs
-red_pin = 14
+blue_pin = 14
 green_pin = 15
 
 
 # Set up the GPIO pins as outputs
-GPIO.setup(red_pin, GPIO.OUT)
+GPIO.setup(blue_pin, GPIO.OUT)
 GPIO.setup(green_pin, GPIO.OUT)
 
 
 # Set up PWM for each LED (frequency set to 100 Hz)
-red_pwm = GPIO.PWM(red_pin, 100)
+blue_pwm = GPIO.PWM(blue_pin, 100)
 green_pwm = GPIO.PWM(green_pin, 100)
 
 
 # Start PWM with 0% duty cycle (LEDs off)
-red_pwm.start(0)
+blue_pwm.start(0)
 green_pwm.start(0)
 
 
 # Function to update the brightness of LEDs
 def update_leds():
-    red_pwm.ChangeDutyCycle(red_slider.get())   # Set Red LED brightness
+    blue_pwm.ChangeDutyCycle(blue_slider.get())   # Set blue LED brightness
     green_pwm.ChangeDutyCycle(green_slider.get())  # Set Green LED brightness
 
 # Function to exit and clean up
 def exit_gui():
-    red_pwm.stop()
+    blue_pwm.stop()
     green_pwm.stop()
     GPIO.cleanup()
     root.destroy()
@@ -40,10 +40,10 @@ def exit_gui():
 root = tk.Tk()
 root.title("Task5.2 GUI")
 
-# Red LED slider
-tk.Label(root, text="Red LED").pack()
-red_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, command=lambda x: update_leds())
-red_slider.pack()
+# blue LED slider
+tk.Label(root, text="blue LED").pack()
+blue_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, command=lambda x: update_leds())
+blue_slider.pack()
 
 # Green LED slider
 tk.Label(root, text="Green LED").pack()
